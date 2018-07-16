@@ -107,10 +107,11 @@ function getNearByItems(lat,lng){
 
       // var html = template('Items', data);
       document.getElementById('Item-fluid').innerHTML += 
+      "<hr/>"+
         "<div class=\"widget-box\">"+
-          "<label class=\"control-label\">"+
+          "<div class=\"controls\">"+
             "<button class=\"show-map-btn btn btn-primary icon-map-marker\">"+distance+"m</button>"+
-          "</label>"+
+          "</div>"+
           "<label class=\"control-label\">地址：</label>"+
           "<div class=\"controls\">"+
             "<span class=\"user-info\">"+address+"</span>"+
@@ -149,8 +150,7 @@ function getNearByItems(lat,lng){
           "</div>"+
           "<input type=\"hidden\" class=\"geolng\" value=\""+geolng+"\"/>"+
           "<input type=\"hidden\" class=\"geolat\" value=\""+geolat+"\"/>"+ 
-        "</div>"+
-      "<hr/>";
+        "</div>";
     }
       // var data = results;
 
