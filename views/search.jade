@@ -1,0 +1,16 @@
+extends layout
+
+append head
+	link(rel='stylesheet',href='/stylesheets/index.css')
+	script(src='/javascripts/search.js')
+
+block content
+	div.main-content
+		div#comment-fluid.container-fluid
+		div#map-container
+			div#closeMapBtn(style='position:absolute;left:-50px;top:10px;width:50px;height:50px;background:#000;opacity:0.5;line-height:50px;font-size:2em;text-align:center') x
+			div#allmap
+		include navigator
+	//-下面两行不放在这里就无法显示地图
+	script(src='http://api.map.baidu.com/api?v=2.0&ak=4fa4e647c4f18305a9459cf796d98b03')
+	script(src='/javascripts/navigator.js')

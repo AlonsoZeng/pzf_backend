@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    block head
+        title= title
+        meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
+        meta(name="viewport" content="initial-scale=1.0, user-scalable=no") 
+        script(src='https://cdn1.lncld.net/static/js/av-min-1.0.0.js')     
+        script(src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js")               
+        script(src='/javascripts/jquery.min.js')
+  body
+    //- 创建角色：
+    div#creat_role
+        select#canRead
+            option(value="") 所有人可见？
+            option(value="true") true
+            option(value="false") false
+        select#canWrite
+            option(value="") 所有人可编辑？
+            option(value="true") true
+            option(value="false") false
+        input#roleName(type="text" placeholder="角色名称")
+        button#submitCreateRole 提交
+
+    script(src='/javascripts/admin.js')

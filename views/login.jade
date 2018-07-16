@@ -1,0 +1,72 @@
+extends layout
+
+append head
+	link(rel='stylesheet',href='/stylesheets/login.css')
+	link(rel='stylesheet',href='/stylesheets/font-awesome.css')
+	script(src='/javascripts/login.js')
+
+block content
+	div#loginbox
+		//登陆
+		form#loginform.form-vertical(action='index.jade')
+			div.control-group.normal_text
+				h3 评租房
+			div.control-group
+				div.controls
+					div.main_input_box
+						span.add-on.bg_lg
+							i.icon-user
+						input#login-email(type='email' placeholder="email")
+			div.control-group
+				div.controls
+					div.main_input_box
+						span.add-on.bg_ly
+							i.icon-lock
+						input#login-pass(type='password' placeholder='pw')
+			div#form-actions
+				span.pull-left
+					a#login-btn.btn.btn-success(type='submit' href='javascript:;') >>>登录<<<
+				span.pull-right
+					a#to-recover.btn.btn-success(type='javascript:;' href='javascript:;') 忘记密码?
+				span.pull-right
+					a#to-signup.btn.btn-success(type='javascript:;' href='javascript:;') 还没帐号?
+		//忘记密码
+		from#recoverform.form-vertical(action='#')
+			p.normal_text 找回密码
+			div.control-group
+				div.controls
+					div.main_input_box
+						span.add-on.bg_lo
+							i.icon-envelope
+						input#recover-email(type='email' placeholder="email")
+			div#form-actions
+				span.pull-left
+					a.flip-link.btn.btn-success.to-login(href='javascript:;') 回到登录页面
+				span.pull-right
+					a#recover-btn.btn.btn-info(href='javascript:;') 找回密码
+		//注册
+		form#signupform.form-vertical(action='#')
+			p.normal_text 注册新账号
+			div.control-group
+				div.controls
+					div.main_input_box
+						span.add-on.bg_lg
+							i.icon-user
+						input#signup-email(type='email' placeholder="email")
+			div.control-group
+				div.controls
+					div.main_input_box
+						span.add-on.bg_ly
+							i.icon-lock
+						input#signup-pass(type='password' placeholder='pw')
+			div.control-group
+				div.controls
+					div.main_input_box
+						span.add-on.bg_ly
+							i.icon-lock
+						input#signup-repass(type='password' placeholder='repw')
+			div#form-actions
+				span.pull-left
+					a.flip-link.btn.btn-success.to-login(href='javascript:;') 回到登录页面
+				span.pull-right
+					a#signup-btn.btn.btn-info 注册

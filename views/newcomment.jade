@@ -1,0 +1,111 @@
+extends layout
+
+append head
+	link(rel='stylesheet',href='/stylesheets/new.css') 
+	//- link(rel='stylesheet',href='/stylesheets/matrix-style.css') 
+
+block content
+	div.main-content
+		//- div#searchInput.fullScreenPage
+		div#r-result
+			input#suggestId(size="20" value="百度" style="width:200px;height:26px" placeholder="搜索房址，更快找到！")
+			a#searchSuggestId(href="javascript:;") 搜索
+		div#searchResultPanel(style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;")
+
+		div#map_results.fullScreenPage
+			div#l-map
+
+		div#result_container(style="display:none")
+			div#l-result
+			div#select_btn
+				a#cancel_result(href="javascript:;") 取消
+				a#confirm_result(href="javascript:;" style="display:none") 确定
+		div#show_result_container
+
+		div#newForm.fullScreenPage.widget-content.nopadding(style="display:none;")
+			div.control-group
+				label.control-label 地名：
+				div.controls
+					input#poi_title.new_address(type="text" placeholder="所在地" disabled="")
+				label.control-label 地址：
+				div.controls
+					input#address.new_address(type="text" placeholder="请在搜索结果中选取地址" disabled="")
+				input#geolng.hide_node(type="number" disabled="")
+				input#geolat.hide_node(type="number" disabled="")
+				input#poi_province.hide_node(type="text" disabled="")
+				input#poi_city.hide_node(type="text" disabled="")
+				input#poi_uid.hide_node(type="text" disabled="")
+				input#poi_type.hide_node(type="text" disabled="")
+
+				label.control-label 具体门牌号：
+				div.controls
+					input#building.form-control(type="text" placeholder="门牌号")
+				//- input#doorNum.form-control(type="text" placeholder="单元")
+			div.control-group
+				label.control-label 房东人品打分
+				div.controls
+					select#hostRate.select_rate.form-control
+						option(value="") 请选择
+						option(value="0") 0
+						option(value="1") 1
+						option(value="2") 2
+						option(value="3") 3
+						option(value="4") 4
+						option(value="5") 5
+				label.control-label 详细描述房东
+				div.controls
+					textarea#hostComment.form-control(placeholder="")
+					span.help-block 家具坏了房东积极修吗？在你的租期会随意闯入吗？会随意违反合同逼迁或涨租吗？把恶意行为爆出来，帮助大家远离恶人
+			div.control-group
+				label.control-label 物业服务打分
+				div.controls
+					select#managerRate.select_rate.form-control
+						option(value="") 请选择
+						option(value="0") 0
+						option(value="1") 1
+						option(value="2") 2
+						option(value="3") 3
+						option(value="4") 4
+						option(value="5") 5
+				label.control-label 详细描述物业
+				div.controls
+					textarea#managerComment.form-control(placeholder="")
+					span.help-block 如果有电梯，会经常故障吗？公共空间干净整洁吗？保安门卫负责谨慎吗？故障报修及时吗？服务态度好吗？垃圾清理及时吗？水压够吗？经常断电断网吗？有任何不满，都说出来！
+			div.control-group
+				label.control-label 室内设施
+				div.controls
+					div#facility
+						label
+							input(type="checkbox" name="radios" value="全自动多功能洗衣机")
+							span 全自动多功能洗衣机
+							br
+						label
+							input(type="checkbox" name="radios" value="热水器")
+							span 热水器
+							br
+			div.control-group
+				label.control-label 证明
+				div.controls
+					span.help-block 为了证明您的住户身份，请提供与房东签署的租赁合同，或其他可以证明您是住户的文件。文件仅用于真实性审核，其他人不会看见。支持jpg/png/gif格式，2M以内的图片				
+					input#cerPhotoUpload.photoUpload(type="file" accept="image/gif,image/jpeg,image/png")
+					span.photoUploadTips 
+					hr
+					span.help-block 请上传您的身份证正面照，或其他可以证明是您本人的证件。文件仅用于真实性审核，其他人不会看见。支持jpg/png/gif格式，2M以内的图片						
+					input#idPhotoUpload.photoUpload(type="file" accept="image/gif,image/jpeg,image/png")
+					span.photoUploadTips
+			div.control-group			
+				label.control-label 其他
+				div.controls
+					textarea#otherComment.form-control(placeholder=" ")
+					span.help-block 邻居怎么样？有室友吗？有的话，怎样评价？物业管理费单价多少？水电煤单价多少？
+			div.control-group
+				button(type="submit" class="btn btn-success") 发送
+				button(type="submit" class="btn btn-primary") 保存
+				button(type="submit" class="btn btn-danger") 取消
+
+	//-下面两行不放在这里就无法显示地图
+	script(src='http://api.map.baidu.com/api?v=2.0&ak=4fa4e647c4f18305a9459cf796d98b03')
+	script(src='/javascripts/new/show_geo.js')
+	script(src='/javascripts/new/sub_new_content.js')
+	include navigator
+	script(src='/javascripts/navigator.js')
