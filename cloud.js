@@ -1,4 +1,5 @@
 var AV = require('leanengine');
+AV.Cloud.useMasterKey();
 
 /**
  * 一个简单的云代码方法

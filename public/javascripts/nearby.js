@@ -3,8 +3,9 @@ var APP_ID = 'CAxAvV51Ux5axTS0RcBtoOb1-gzGzoHsz';
 var APP_KEY = 'w8TTlyjgG30TCq5jpqWaQPg8';
 AV.init({
   appId: APP_ID,
-  appKey:APP_KEY
+  appKey:APP_KEY,
 });
+
 
 // 获取用户缓存
 var currentUser = AV.User.current();
@@ -111,6 +112,10 @@ function getNearByItems(lat,lng){
         "<div class=\"widget-box\">"+
           "<div class=\"controls\">"+
             "<button class=\"show-map-btn btn btn-primary icon-map-marker\">"+distance+"m</button>"+
+            "<button class=\"approved-btn btn btn-primary icon-map-marker\">审核通过</button>"+
+            "<button class=\"disapproved-btn btn btn-primary icon-map-marker\">审核不通过</button>"+
+            // "<button class=\"btn btn-primary icon-map-marker onclick=\"verifyItem("+id+",\'approved\')\" \">审核通过</button>"+
+            // "<button class=\"btn btn-primary icon-map-marker onclick=\"verifyItem("+id+",\'disapproved\')\" \">审核不通过</button>"+
           "</div>"+
           "<label class=\"control-label\">地址：</label>"+
           "<div class=\"controls\">"+
@@ -150,6 +155,7 @@ function getNearByItems(lat,lng){
           "</div>"+
           "<input type=\"hidden\" class=\"geolng\" value=\""+geolng+"\"/>"+
           "<input type=\"hidden\" class=\"geolat\" value=\""+geolat+"\"/>"+ 
+          "<input type=\"hidden\" class=\"item-id\" value=\""+id+"\"/>"+ 
         "</div>";
     }
       // var data = results;
@@ -211,6 +217,37 @@ function getNearByItems(lat,lng){
         $('#map-container').css({"visibility":"visible"});
       }
       preBtnIndex = currentBtnIndex;
+    });
+
+    $(".approved-btn").click(function(){
+      var currentBtnIndex = $(this).index(".approved-btn");
+      var mainDiv = $(this).parent().parent();
+
+      var itemIdInput = mainDiv.find("input.item-id");
+
+      var itemID = itemIdInput.val();
+      AV.Cloud.run('verifyItem', { item: itemID, verifyResult:"approved" }).then(function (data) {
+        alert("提交成功");
+      }, function (err) {
+        // 处理调用失败
+        console.log(err)
+      });
+    });
+
+    $(".disapproved-btn").click(function(){
+      var currentBtnIndex = $(this).index(".approved-btn");
+      var mainDiv = $(this).parent().parent();
+
+      var itemIdInput = mainDiv.find("input.item-id");
+
+      var itemID = itemIdInput.val();
+      AV.Cloud.run('verifyItem', { item: itemID, verifyResult:"disapproved" }).then(function (data) {
+        // console.log(data)
+        alert("提交成功");
+      }, function (err) {
+        // 处理调用失败
+        console.log(err)
+      });
     });
   },
 
