@@ -38,8 +38,10 @@ function getNearByItems(lat,lng){
   // areaQuery.withinKilometers('geoPoint', point, 100.0);
 
   // var typeQuery = new AV.Query("Item");
+  //查询已通过审核的
   query.equalTo('checkStatus', 'approved');
-
+  //查询未通过审核的
+  // query.equalTo('checkStatus', 'null');
   // var query = AV.Query.and(areaQuery,typeQuery);
   // query.find().then(function (results) {
   //     var nearbyTodos = results;
@@ -86,20 +88,26 @@ function getNearByItems(lat,lng){
 
       // var hostItem = attributes['hostItem'];
 
-      var managerRate = attributes['managerRate'];
+      var manageRate = attributes['estateManageRate'];
+
+      var environmentRate = attributes['environmentRate'];
 
       // var managerItem = attributes['managerItem'];
 
       var otherDesc = attributes['otherDesc'];
 
       // if(attributes['otherDesc'])
-      var houseImg = imgsInHtml(attributes['imgSrc']);
+      var houseImg = attributes['imgSrc'];
+      var houseImgHtml = getImgsToHtml(houseImg);
 
-      var idImg = imgsInHtml(attributes['idImgSrc']);
+      var idImg = attributes['idImgSrc'];
+      var idImgHtml = getImgsToHtml(idImg);
 
-      var contractImg = imgsInHtml(attributes['contractImgSrc']);
+      var contractImg = attributes['contractImgSrc'];
+      var contractImgHtml = getImgsToHtml(contractImg);
 
-      var rentFlowImg = imgsInHtml(attributes['rentFlowImgSrc']);
+      var rentFlowImg = attributes['rentFlowImgSrc'];
+      var rentFlowImgHtml = getImgsToHtml(rentFlowImg);
 
       ItemNum++;
 
@@ -131,7 +139,11 @@ function getNearByItems(lat,lng){
           "</div>"+
           "<label class=\"control-label\">管理者人品：</label>"+
           "<div class=\"controls\">"+
-            "<span class=\"user-info\">"+managerRate+"分"+"</span>"+
+            "<span class=\"user-info\">"+manageRate+"分"+"</span>"+
+          "</div>"+
+          "<label class=\"control-label\">环境评分：</label>"+
+          "<div class=\"controls\">"+
+            "<span class=\"user-info\">"+environmentRate+"分"+"</span>"+
           "</div>"+
           "<label class=\"control-label\">其他补充：</label>"+
           "<div class=\"controls\">"+
@@ -139,19 +151,19 @@ function getNearByItems(lat,lng){
           "</div>"+
           "<label class=\"control-label\">房间照片：</label>"+
           "<div class=\"controls\">"+
-            "<span class=\"user-info\">"+houseImg+"</span>"+
+            "<span class=\"user-info\">"+houseImgHtml+"</span>"+
           "</div>"+
           "<label class=\"control-label\">身份照片：</label>"+
           "<div class=\"controls\">"+
-            "<span class=\"user-info\">"+idImg+"</span>"+
+            "<span class=\"user-info\">"+idImgHtml+"</span>"+
           "</div>"+
           "<label class=\"control-label\">合同照片：</label>"+
           "<div class=\"controls\">"+
-            "<span class=\"user-info\">"+contractImg+"</span>"+
+            "<span class=\"user-info\">"+contractImgHtml+"</span>"+
           "</div>"+
           "<label class=\"control-label\">交租流水照片：</label>"+
           "<div class=\"controls\">"+
-            "<span class=\"user-info\">"+rentFlowImg+"</span>"+
+            "<span class=\"user-info\">"+rentFlowImgHtml+"</span>"+
           "</div>"+
           "<input type=\"hidden\" class=\"geolng\" value=\""+geolng+"\"/>"+
           "<input type=\"hidden\" class=\"geolat\" value=\""+geolat+"\"/>"+ 
@@ -280,13 +292,23 @@ function imgsInHtml(data){
   console.log(data);
   console.log(typeof(data));
 
-  if(data!="" && data!=undefined && data.length>0){
+  if(data.length>0){
     var imghtml = "";
     for (var i = data.length - 1; i >= 0; i--) {
-      imghtml+="<img src="+data[i]+" alt=\"上海鲜花港 - 郁金香\" />"
+      imghtml+="<img src="+data[i]+"/>"
     }
     return imghtml;
   }else{
     return "无";
   }
+}
+
+function getImgsToHtml(data){
+  var dataHtml = "";
+  if(data!=null && data.length!=0 && data!=undefined){
+    for (var i = data.length - 1; i >= 0; i--) {
+      dataHtml+="<img src=\""+data[i]+"\">"
+    }
+  }
+  return dataHtml;
 }
